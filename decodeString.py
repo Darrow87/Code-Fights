@@ -46,19 +46,18 @@ def decodeString(string):
     if not string[start_bracket - 2].isdigit():
       multiplier = int(string[start_bracket - 1])
       string_to_multiply = string[start_bracket:end_bracket - 1]
-      print "mult single"
 
     # if multiplier > 9 i.e. multi digit
     else:
       multiplier = ''
       for index, value in reversed(list(enumerate(string))):
-        # print index, value, start_bracket, end_bracket
+
         if index < start_bracket and value.isdigit():
           multiplier += value
           # stop the loop once the mult digit multiplier ends
           if not string[index - 1].isdigit():
             break
-          # print value
+
       multiplier = int(multiplier[::-1])
       string_to_multiply = string[start_bracket:end_bracket - 1]
 
@@ -76,7 +75,6 @@ def decodeString(string):
 
 def decodeStringR(string):
   if not "[" in string:
-    print string
     return string
 
   # find last occuring digit which gives us starting bracket at index + 1
@@ -105,7 +103,7 @@ def decodeStringR(string):
   else:
     multiplier = ''
     for index, value in reversed(list(enumerate(string))):
-      # print index, value, start_bracket, end_bracket
+
       if index < start_bracket and value.isdigit():
         multiplier += value
         # stop the loop once the mult digit multiplier ends
