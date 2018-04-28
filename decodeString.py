@@ -71,3 +71,55 @@ def decodeString(string):
     # remove number index
     indicies.pop()
   return string
+
+# Recursive Solution
+
+def decodeStringR(string):
+  if not "[" in string:
+    print string
+    return string
+
+  # find last occuring digit which gives us starting bracket at index + 1
+  for index, value in reversed(list(enumerate(string))):
+    if value.isdigit():
+      start_bracket = index + 1
+      break
+
+
+  # find end bracket
+  for index, value in enumerate(string):
+    if index > start_bracket and value == ']':
+      end_bracket = index
+      break
+
+  # Remove starting and ending parethesis
+  string = string[:end_bracket] + string[end_bracket + 1:]
+  string = string[:start_bracket] + string[start_bracket + 1:]
+
+  # assign multiplier if  <= 9 i.e. single digit
+  if not string[start_bracket - 2].isdigit():
+    multiplier = int(string[start_bracket - 1])
+    string_to_multiply = string[start_bracket:end_bracket - 1]
+
+  # assign multiplier if > 9 i.e. multi digit
+  else:
+    multiplier = ''
+    for index, value in reversed(list(enumerate(string))):
+      # print index, value, start_bracket, end_bracket
+      if index < start_bracket and value.isdigit():
+        multiplier += value
+        # stop the loop once the mult digit multiplier ends
+        if not string[index - 1].isdigit():
+          break
+
+    # convert multiplier to int and slice string chunk to multiply
+    multiplier = int(multiplier[::-1])
+    string_to_multiply = string[start_bracket:end_bracket - 1]
+
+  # replace multiplier and string chuck with multiplied string chunk
+  x = len(str(multiplier))
+  replaced = string[start_bracket - x:end_bracket - 1]
+  insert = multiplier * string_to_multiply
+  string = string.replace(replaced, insert)
+
+  decodeStringR(string)
