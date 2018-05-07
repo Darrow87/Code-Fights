@@ -1,4 +1,9 @@
-# Write a method takes an array of bank account and executes withdraw, deposit, and transfer requests.
+# Write a method takes an array of bank account balances and executes withdraw, deposit, and transfer requests.
+
+# e.g. bankRequests([10, 100, 20, 50, 30], ["withdraw 2 10",
+ # "transfer 5 1 20",
+ # "deposit 5 20",
+ # "transfer 3 4 15"])
 
 # If an error arises (e.g. negative account balance or account does not exist), return <-1> if 1 was the failing account etc.
 
